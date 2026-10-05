@@ -82,22 +82,6 @@ python server.py myapp:application
 
 ---
 
-## Writing a WSGI App
-
-A WSGI application is just a Python callable that accepts `environ` and `start_response`. Here's the minimal example included in [`app.py`](app.py):
-
-```python
-def hello_app(environ, start_response):
-    body = b"Hello from http server version 0.1"
-    headers = [
-        ("Content-Type", "text/plain"),
-        ("Content-Length", str(len(body))),
-    ]
-    start_response("200 OK", headers)
-    return [body]
-```
-
----
 
 ## API Reference
 
@@ -114,30 +98,6 @@ The core server class defined in [`server.py`](server.py).
 #### `WhiteServer.runServer()`
 
 Starts the server and blocks until interrupted (Ctrl+C).
-
----
-
-### `import_app(target)`
-
-Dynamically imports a WSGI app from a `"module:callable"` string.
-
-```python
-from server import import_app
-
-app = import_app("myapp:application")
-```
-
----
-
-## Roadmap
-
-- [ ] Custom host/port via CLI flags
-- [ ] Multi-threaded request handling
-- [ ] Request logging middleware
-- [ ] HTTPS / TLS support
-- [ ] Hot-reload on file changes
-
----
 
 ## License
 
